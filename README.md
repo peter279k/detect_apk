@@ -35,3 +35,15 @@ Specify the current and absolute file path for aapt execution file.
 }
 
 ```
+
+## Step5
+DB: MySQL
+
+create the databse name: apks and import the apks.sql file.
+
+## Step6
+Join it!
+
+```bash
+php index.php
+```
