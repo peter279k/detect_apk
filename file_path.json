@@ -1,0 +1,8 @@
+{
+    "file_path": [
+		"E:\\apkmirror\\apk_collector\\helper\\files\\apkmirror", 
+		"G:\\apkmirror\\apk_collector\\helper\\files\\apkmirror", 
+		"E:\\apk_collector\\helper\\files\\androidapksfree"
+	], 
+	"aapt_execution": "C:\\Apktool\\brut.apktool\\apktool-lib\\src\\main\\resources\\prebuilt\\aapt\\windows\\aapt.exe"
+}
