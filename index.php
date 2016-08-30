@@ -35,10 +35,8 @@
 				
 				foreach($paths as $key => $value) {
 					if($key == "file_path") {
-						if($index >= 1808) {
-							foreach($value as $file_path)
-								process_apk($file_path, $paths["aapt_execution"]);
-						}
+						foreach($value as $file_path)
+							process_apk($file_path, $paths["aapt_execution"]);
 					}
 				}
 			}
