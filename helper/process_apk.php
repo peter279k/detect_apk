@@ -109,7 +109,8 @@
 		$data[":rate_people"] = 0;
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
-		echo $command . "\n";
+		echo exec($command) . "\n";
+		
 		$process = new Process($command);
 		
 		$process -> run(function ($type, $buffer) {
