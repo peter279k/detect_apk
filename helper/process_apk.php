@@ -16,7 +16,7 @@
 		
 		$len = count($apk_dirs);
 		
-		match_apk($apk_dirs, $file_path);
+		match_apk($apk_dirs, $file_path, $aapt);
 		
 		/*
 		for(;$index<$len;$index++) {
@@ -29,7 +29,7 @@
 		*/
 	}
 	
-	function match_apk($apk_dirs, $file_path) {
+	function match_apk($apk_dirs, $file_path, $aapt) {
 		
 		$file_paths = explode("\\", $file_path);
 		
