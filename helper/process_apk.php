@@ -80,7 +80,7 @@
 			
 					if($extension_name["extension"] == "apk") {
 						echo $apk_dirs[$index] . "\n";
-						execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+						execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
 					}
 					//exit();
 				}
@@ -113,7 +113,6 @@
 		$process = new Process($command);
 		
 		$process -> run(function ($type, $buffer) {
-			echo $type . "\n";
 			if(Process::ERR === $type) {
 				$buffer = str_replace(["\r", "\n"], "", $buffer);
 				$buffer = trim($buffer);
