@@ -176,7 +176,8 @@
 					var_dump($link_db -> errorInfo());
 				}
 				else {
-					echo "store success\n";
+					//echo "store success\n";
+					$stmt -> debugDumpParams();
 				}
 			}
 			catch(PDOException $e) {
