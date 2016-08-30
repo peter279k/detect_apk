@@ -71,7 +71,7 @@
 						$data[":version"] = $buffers[3];
 						
 						//var_dump($data);
-						store_data($data);
+						store_data($data, $file_path . "\\" . $file_name);
 					}
 				}
 			}
@@ -85,7 +85,7 @@
 		return $str;
 	}
 	
-	function store_data($data) {
+	function store_data($data, $apk_file_path) {
 		//using MySQL to store apk information
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
@@ -109,6 +109,13 @@
 				develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source, :develop_team, :size, :hash)");
 			
 				$stmt -> execute($data);
+				
+				if($stmt->rowCount()) {
+					echo "store success\n";
+				}
+				else {
+					echo $apk_file_path . "\n";
+				}
 			}
 			catch(PDOException $e) {
 				echo "store failed\n";
@@ -122,8 +129,6 @@
 					exit("The program is terminated...");
 				}
 			}
-			
-			echo "store success\n";
 		}
 	}
 ?>
