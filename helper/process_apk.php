@@ -61,8 +61,8 @@
 						$data[":apk_id"] = $buffers[1];
 						$data[":version"] = $buffers[3];
 						
-						var_dump($data);
-						//store_data($data);
+						//var_dump($data);
+						store_data($data);
 					}
 				}
 			}
