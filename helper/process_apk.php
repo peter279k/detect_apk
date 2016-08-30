@@ -119,7 +119,10 @@
 					echo "store success\n";
 				}
 				else {
-					echo $apk_file_path . "\n";
+					if(check_duplicate($link_db, $data))
+						echo $apk_file_path . "\n";
+					else
+						echo $apk_file_path . " is on inserted...\n";
 				}
 			}
 			catch(PDOException $e) {
@@ -134,6 +137,24 @@
 					exit("The program is terminated...");
 				}
 			}
+			
+			$link_db = null;
 		}
+	}
+	
+	function check_duplicate($link_db, $data) {
+		$stmt = $link_db -> prepare("SELECT * FROM apk_info WHERE apk_id = :apk_id");
+		$stmt -> execute(array(
+			":apk_id" => $data[":apk_id"]
+		));
+		
+		if($stmt -> rowCount() >= 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		$link_db = null;
 	}
 ?>
