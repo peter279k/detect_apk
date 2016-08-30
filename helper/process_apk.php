@@ -1,6 +1,8 @@
 <?php
 	use Symfony\Component\Process\Process;
 	
+	$data = array();
+	
 	function process_apk($file_path, $aapt) {
 		if(!is_dir($file_path)) {
 			die("invalid file path");
@@ -21,7 +23,10 @@
 	
 	function execute_command($command, $file_name, $file_path) {
 		$file_paths = explode("\\", $file_path);
+		
+		global $data;
 		$data = array();
+		
 		$len = count($file_paths);
 		$data[":apk_source"] = $file_paths[$len-1];
 		$data[":size"] = filesize($file_path . "\\" . $file_name);
@@ -45,7 +50,7 @@
 			}
 			else {
 				//package: name='air.com.vudu.air.DownloaderTablet' versionCode='1148101' versionName='4.1.51.8101' platformBuildVersionName='5.1.1-1819727'
-				
+				global $data;
 				$buffers = explode(" ", $buffer);
 				if(count($buffers) > 1) {
 					$len = count($buffers);
