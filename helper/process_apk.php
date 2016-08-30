@@ -75,14 +75,11 @@
 			}
 			
 			if($check == false) {
-				if($apk_dirs[$index] === "another.music.player_1.5.10-250_minAPI16(nodpi).apk") {
-					$extension_name = pathinfo($apk_dirs[$index]);
+				$extension_name = pathinfo($apk_dirs[$index]);
 			
-					if($extension_name["extension"] == "apk") {
-						echo $apk_dirs[$index] . "\n";
-						execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
-					}
-					//exit();
+				if($extension_name["extension"] == "apk") {
+					echo $apk_dirs[$index] . "\n";
+					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
 				}
 			}
 		}
@@ -112,6 +109,32 @@
 		
 		exec($command);
 		
+		$handle = fopen("./res.txt", "r");
+		
+		$buffer = fgets($handle);
+		
+		$buffers = explode(" ", $buffer);
+		
+		if(count($buffers) > 1) {
+			$len = count($buffers);
+			if($buffers[0] == "package:") {
+				$buffers[1] = split_str($buffers[1]);
+				$buffers[3] = split_str($buffers[3]);
+				
+				$data[":apk_id"] = $buffers[1];
+				$data[":version"] = $buffers[3];
+						
+				//var_dump($data);
+				global $apk_file_path;
+				store_data($data, $apk_file_path);
+			}
+		}
+		
+		fclose($handle);
+		
+		@unlink("./res.txt");
+		
+		/*
 		$process = new Process($command);
 		
 		$process -> run(function ($type, $buffer) {
@@ -138,15 +161,10 @@
 						global $apk_file_path;
 						store_data($data, $apk_file_path);
 					}
-					else {
-						echo "no-package\n";
-					}
-				}
-				else {
-					echo "buffer-count-error\n";
 				}
 			}
 		});
+		*/
 	}
 	
 	function split_str($str) {
