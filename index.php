@@ -33,7 +33,6 @@
 				$paths = file_get_contents("./file_path.json");
 				$paths = json_decode($paths, true);
 				
-				$index = 1;
 				foreach($paths as $key => $value) {
 					if($key == "file_path") {
 						if($index >= 1808) {
@@ -41,8 +40,6 @@
 								process_apk($file_path, $paths["aapt_execution"]);
 						}
 					}
-					
-					$index++;
 				}
 			}
 		}
