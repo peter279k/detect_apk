@@ -1,4 +1,6 @@
 <?php
+	ini_set('memory_limit', '512M');
+
 	require "vendor/autoload.php";
 	require "helper/greet.php";
 	require "helper/process_apk.php";

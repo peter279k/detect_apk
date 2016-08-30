@@ -95,18 +95,25 @@
 		}
 		
 		else {
-			$stmt = $link_db -> prepare("INSERT INTO apk_info(apk_id, version, downloads, rate, rate_people, category, apk_source, 
-			develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source, :develop_team, :size, :hash)");
+			try {
+				$stmt = $link_db -> prepare("INSERT INTO apk_info(apk_id, version, downloads, rate, rate_people, category, apk_source, 
+				develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source, :develop_team, :size, :hash)");
 			
-			$stmt -> execute($data);
-			
-			if($stmt) {
-				echo "store success\n";
+				$stmt -> execute($data);
 			}
-			else {
+			catch(PDOException $e) {
 				echo "store failed\n";
-				exit("The program is terminated...");
+				
+				if($e -> getCode() == 1062) {
+					// Take some action if there is a key constraint violation, i.e. duplicate name
+				}
+				else {
+					throw $e;
+					exit("The program is terminated...");
+				}
 			}
+			
+			echo "store success\n";
 		}
 	}
 ?>
