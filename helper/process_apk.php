@@ -75,7 +75,11 @@
 			}
 			
 			if($check == false) {
-				echo $apk_dirs[$index] . "\n";
+				$extension_name = pathinfo($apk_dirs[$index]);
+			
+				if($extension_name["extension"] == "apk") {
+					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+				}
 			}
 		}
 	}
