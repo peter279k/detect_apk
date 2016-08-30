@@ -155,7 +155,7 @@
 	
 	function store_data($data, $apk_file_path) {
 		//using MySQL to store apk information
-		
+		echo "store data start...\n";
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
 			$user = fgets($handle, 4096);
