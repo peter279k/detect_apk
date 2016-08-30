@@ -109,27 +109,9 @@
 		$data[":rate_people"] = 0;
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
-		
+		echo $command . "\n";
 		$process = new Process($command);
-		$process -> run();
-		$msg = $process->getOutput();
-		$buffers = explode(" ", $msg);
-		if(count($buffers) > 1) {
-			$len = count($buffers);
-			if($buffers[0] == "package:") {
-				$buffers[1] = split_str($buffers[1]);
-				$buffers[3] = split_str($buffers[3]);
-						
-				$data[":apk_id"] = $buffers[1];
-				$data[":version"] = $buffers[3];
-						
-				//var_dump($data);
-				global $apk_file_path;
-				store_data($data, $apk_file_path);
-			}
-		}
 		
-		/*
 		$process -> run(function ($type, $buffer) {
 			if(Process::ERR === $type) {
 				$buffer = str_replace(["\r", "\n"], "", $buffer);
@@ -163,8 +145,6 @@
 				}
 			}
 		});
-		
-		*/
 	}
 	
 	function split_str($str) {
