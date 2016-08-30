@@ -47,7 +47,7 @@
 		}
 		
 		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
-		$stmt = $link_db -> prepare("select count(*) from `apk_info` where apk_source = :apk_source");
+		$stmt = $link_db -> prepare("select * from `apk_info` where apk_source = :apk_source");
 		$result = $stmt -> execute(array(
 			":apk_source" => $file_paths[$len-1]
 		));
@@ -59,6 +59,8 @@
 			$res[$index]["apk_id"] = $row["apk_id"];
 			$index++;
 		}
+		
+		$link_db = null;
 		
 		$check = false;
 		
