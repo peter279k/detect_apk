@@ -75,11 +75,14 @@
 			}
 			
 			if($check == false) {
-				$extension_name = pathinfo($apk_dirs[$index]);
+				if($apk_dirs[$index] === "another.music.player_1.5.10-250_minAPI16(nodpi).apk") {
+					$extension_name = pathinfo($apk_dirs[$index]);
 			
-				if($extension_name["extension"] == "apk") {
-					echo $apk_dirs[$index] . "\n";
-					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+					if($extension_name["extension"] == "apk") {
+						echo $apk_dirs[$index] . "\n";
+						execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+					}
+					exit();
 				}
 			}
 		}
@@ -174,6 +177,8 @@
 					echo "\nPDO::errorInfo():\n";
 					var_dump($link_db -> errorInfo());
 				}
+				
+				var_dump($data);
 			}
 			catch(PDOException $e) {
 				echo "store failed\n";
