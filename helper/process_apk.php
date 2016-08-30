@@ -110,6 +110,8 @@
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
 		
+		var_dump($data);
+		
 		$process = new Process($command);
 		$process -> run(function ($type, $buffer) {
 			if(Process::ERR === $type) {
@@ -149,7 +151,6 @@
 	
 	function store_data($data, $apk_file_path) {
 		//using MySQL to store apk information
-		var_dump($data);
 		
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
