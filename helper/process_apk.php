@@ -156,7 +156,7 @@
 		}
 		
 		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
-		$link_db -> setAttribute(PDO::ATTR_EMULATE_PREPARES,false); 
+		$link_db -> setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 		
 		if(!$link_db) {
 			die("cannot link database");
