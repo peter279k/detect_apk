@@ -78,7 +78,6 @@
 				$extension_name = pathinfo($apk_dirs[$index]);
 			
 				if($extension_name["extension"] == "apk") {
-					echo $apk_dirs[$index] . "\n";
 					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
 				}
 			}
@@ -176,7 +175,6 @@
 	
 	function store_data($data, $apk_file_path) {
 		//using MySQL to store apk information
-		echo "store data start...\n";
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
 			$user = fgets($handle, 4096);
