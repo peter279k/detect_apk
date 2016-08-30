@@ -82,7 +82,7 @@
 						echo $apk_dirs[$index] . "\n";
 						execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
 					}
-					exit();
+					//exit();
 				}
 			}
 		}
