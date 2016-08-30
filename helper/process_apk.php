@@ -12,13 +12,7 @@
 		//using pathinfo() to detect extension file name
 		$apk_dirs = scandir($file_path);
 		
-		if($file_path == "E:\\apkmirror\\apk_collector\\helper\\files\\apkmirror") {
-			$index = 1807;
-			echo $index . "\n";
-		}
-		else {
-			$index = 2;
-		}
+		$index = 2;
 		
 		$len = count($apk_dirs);
 		
@@ -119,9 +113,7 @@
 					echo "store success\n";
 				}
 				else {
-					if(check_duplicate($link_db, $data))
-						echo $apk_file_path . "\n";
-					else
+					if(!check_duplicate($link_db, $data))
 						echo $apk_file_path . " is on inserted...\n";
 				}
 			}
