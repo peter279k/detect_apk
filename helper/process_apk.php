@@ -156,6 +156,7 @@
 		}
 		
 		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
+		$link_db -> setAttribute(PDO::ATTR_EMULATE_PREPARES,false); 
 		
 		if(!$link_db) {
 			die("cannot link database");
@@ -169,12 +170,13 @@
 				$stmt -> execute($data);
 				
 				echo "row count: " . $stmt -> rowCount() . "\n";
-				if($stmt -> rowCount()) {
-					echo "store success\n";
+				
+				if(!$stmt) {
+					echo "\nPDO::errorInfo():\n";
+					var_dump($link_db -> errorInfo());
 				}
 				else {
-					if(!check_duplicate($link_db, $data))
-						echo $apk_file_path . " is no inserted...\n";
+					echo "store success\n";
 				}
 			}
 			catch(PDOException $e) {
@@ -192,21 +194,5 @@
 			
 			$link_db = null;
 		}
-	}
-	
-	function check_duplicate($link_db, $data) {
-		$stmt = $link_db -> prepare("SELECT * FROM apk_info WHERE apk_id = :apk_id");
-		$stmt -> execute(array(
-			":apk_id" => $data[":apk_id"]
-		));
-		
-		if($stmt -> rowCount() >= 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-		
-		$link_db = null;
 	}
 ?>
