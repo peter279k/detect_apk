@@ -85,7 +85,7 @@
 			}
 		}
 		else {
-			exit("db.txt must have been setted.");
+			exit("db.txt must have been setted.\n");
 		}
 		
 		$link_db = new PDO('mysql:host=localhost;dbname=apks', $user, $pass);
