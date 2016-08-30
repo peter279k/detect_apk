@@ -16,70 +16,11 @@
 		
 		$len = count($apk_dirs);
 		
-		match_apk($apk_dirs, $file_path, $aapt);
-		
-		/*
 		for(;$index<$len;$index++) {
 			$extension_name = pathinfo($apk_dirs[$index]);
 			
 			if($extension_name["extension"] == "apk") {
-				//execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
-			}
-		}
-		*/
-	}
-	
-	function match_apk($apk_dirs, $file_path, $aapt) {
-		
-		$file_paths = explode("\\", $file_path);
-		
-		$len = count($file_paths);
-		
-		if(file_exists("./db.txt")) {
-			$handle = fopen("./db.txt", "r");
-			$user = fgets($handle, 4096);
-			$pass = fgets($handle, 4096);
-			fclose($handle);
-		}
-		else {
-			exit("db.txt must have been setted.\n");
-		}
-		
-		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
-		$stmt = $link_db -> prepare("select * from `apk_info` where apk_source = :apk_source");
-		$result = $stmt -> execute(array(
-			":apk_source" => $file_paths[$len-1]
-		));
-		
-		$res = array();
-		$index = 0;
-		
-		while($row = $stmt -> fetch()) {
-			$res[$index]["apk_id"] = $row["apk_id"];
-			$index++;
-		}
-		
-		$check = false;
-		
-		$len = count($apk_dirs);
-		
-		for($index=2;$index<$len;$index++) {
-			for($j=0;$j<count($res);$j++) {
-				if(stristr($apk_dirs[$index], $res[$j]["apk_id"]) == false) {
-					$check = true;
-				}
-				else {
-					$check = false;
-					break;
-				}
-			}
-			
-			if($check == false) {
-				$extension_name = pathinfo($apk_dirs[$index]);
-			
-				if($extension_name["extension"] == "apk") {
-					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
-				}
+				execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"] . " > res.txt", $extension_name["basename"], $file_path);
 			}
 		}
 	}
@@ -132,38 +73,6 @@
 		fclose($handle);
 		
 		@unlink("./res.txt");
-		
-		/*
-		$process = new Process($command);
-		
-		$process -> run(function ($type, $buffer) {
-			if(Process::ERR === $type) {
-				$buffer = str_replace(["\r", "\n"], "", $buffer);
-				$buffer = trim($buffer);
-				if(strlen($buffer) != 0)
-					echo $buffer . "\n";
-			}
-			else {
-				//package: name='air.com.vudu.air.DownloaderTablet' versionCode='1148101' versionName='4.1.51.8101' platformBuildVersionName='5.1.1-1819727'
-				global $data;
-				$buffers = explode(" ", $buffer);
-				if(count($buffers) > 1) {
-					$len = count($buffers);
-					if($buffers[0] == "package:") {
-						$buffers[1] = split_str($buffers[1]);
-						$buffers[3] = split_str($buffers[3]);
-						
-						$data[":apk_id"] = $buffers[1];
-						$data[":version"] = $buffers[3];
-						
-						//var_dump($data);
-						global $apk_file_path;
-						store_data($data, $apk_file_path);
-					}
-				}
-			}
-		});
-		*/
 	}
 	
 	function split_str($str) {
