@@ -78,6 +78,7 @@
 				$extension_name = pathinfo($apk_dirs[$index]);
 			
 				if($extension_name["extension"] == "apk") {
+					echo $apk_dirs[$index] . "\n";
 					execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
 				}
 			}
@@ -168,8 +169,6 @@
 				develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source, :develop_team, :size, :hash)");
 			
 				$stmt -> execute($data);
-				
-				echo "row count: " . $stmt -> rowCount() . "\n";
 				
 				if(!$stmt) {
 					echo "\nPDO::errorInfo():\n";
