@@ -88,7 +88,7 @@
 			exit("db.txt must have been setted.\n");
 		}
 		
-		$link_db = new PDO('mysql:host=localhost;dbname=apks', trim($user), trim($pass));
+		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
 		
 		if(!$link_db) {
 			die("cannot link database");
