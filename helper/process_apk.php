@@ -82,6 +82,8 @@
 				else {
 					$pass = fgets($handle, 4096);
 				}
+				
+				$user_index++;
 			}
 		}
 		else {
