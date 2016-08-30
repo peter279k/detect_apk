@@ -110,6 +110,8 @@
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
 		
+		exec($command);
+		
 		$process = new Process($command);
 		
 		$process -> run(function ($type, $buffer) {
