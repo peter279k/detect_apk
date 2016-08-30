@@ -175,10 +175,6 @@
 					echo "\nPDO::errorInfo():\n";
 					var_dump($link_db -> errorInfo());
 				}
-				else {
-					//echo "store success\n";
-					$stmt -> debugDumpParams();
-				}
 			}
 			catch(PDOException $e) {
 				echo "store failed\n";
