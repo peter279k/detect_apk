@@ -90,8 +90,7 @@
 		
 		else {
 			$stmt = $link_db -> prepare("INSERT INTO apk_info(apk_id, version, downloads, rate, rate_people, category, apk_source, 
-			meta_source, develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source,  
-			:meta_source, :develop_team, :size, :hash)");
+			develop_team, size, hash) VALUES(:apk_id, :version, :downloads, :rate, :rate_people, :category, :apk_source, :develop_team, :size, :hash)");
 			
 			$stmt -> execute($data);
 			
