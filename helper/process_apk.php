@@ -30,7 +30,6 @@
 	}
 	
 	function match_apk($apk_dirs, $file_path) {
-		$len = count($apk_dirs);
 		
 		$file_paths = explode("\\", $file_path);
 		
@@ -55,18 +54,18 @@
 		$res = array();
 		$index = 0;
 		
-		while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+		while($row = $stmt -> fetch()) {
 			$res[$index]["apk_id"] = $row["apk_id"];
 			$index++;
 		}
 		
 		$check = false;
 		
+		$len = count($apk_dirs);
+		
 		for($index=2;$index<$len;$index++) {
 			for($j=0;$j<count($res);$j++) {
-				if(stristr($file_paths[$index], $res[$j]["apk_id"]) == false) {
-					//echo $file_paths[$index] . "\n";
-					echo $res[$j]["apk_id"] . "\n";
+				if(stristr($apk_dirs[$index], $res[$j]["apk_id"]) == false) {
 					$check = true;
 				}
 				else {
