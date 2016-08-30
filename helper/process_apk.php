@@ -75,7 +75,7 @@
 			}
 			
 			if($check == false) {
-				echo $file_paths[$index] . "\n";
+				echo $apk_dirs[$index] . "\n";
 			}
 		}
 	}
