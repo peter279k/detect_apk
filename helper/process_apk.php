@@ -110,11 +110,10 @@
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
 		
-		var_dump($data);
-		
 		$process = new Process($command);
 		$process -> run(function ($type, $buffer) {
 			if(Process::ERR === $type) {
+				echo "error happen...";
 				$buffer = str_replace(["\r", "\n"], "", $buffer);
 				$buffer = trim($buffer);
 				if(strlen($buffer) != 0)
