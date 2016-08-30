@@ -13,6 +13,7 @@
 		
 		if($file_path == "E:\\apkmirror\\apk_collector\\helper\\files\\apkmirror") {
 			$index = 1807;
+			echo $index . "\n";
 		}
 		else {
 			$index = 2;
