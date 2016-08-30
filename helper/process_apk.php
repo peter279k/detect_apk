@@ -10,9 +10,17 @@
 		
 		//using pathinfo() to detect extension file name
 		$apk_dirs = scandir($file_path);
+		
+		if($file_path == "E:\\apkmirror\\apk_collector\\helper\\files\\apkmirror") {
+			$index = 1807;
+		}
+		else {
+			$index = 2;
+		}
+		
 		$len = count($apk_dirs);
 		
-		for($index=2;$index<$len;$index++) {
+		for(;$index<$len;$index++) {
 			$extension_name = pathinfo($apk_dirs[$index]);
 			
 			if($extension_name["extension"] == "apk") {
