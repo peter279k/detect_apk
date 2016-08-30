@@ -16,11 +16,65 @@
 		
 		$len = count($apk_dirs);
 		
+		match_apk($apk_dirs, $file_paths);
+		
+		/*
 		for(;$index<$len;$index++) {
 			$extension_name = pathinfo($apk_dirs[$index]);
 			
 			if($extension_name["extension"] == "apk") {
-				execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+				//execute_command($aapt . "  dump badging " . $file_path . "\\" . $extension_name["basename"], $extension_name["basename"], $file_path);
+			}
+		}
+		*/
+	}
+	
+	function match_apk($apk_dirs, $file_path) {
+		$len = count($apk_dirs);
+		
+		$file_paths = explode("\\", $file_path);
+		
+		$len = count($file_paths);
+		
+		if(file_exists("./db.txt")) {
+			$handle = fopen("./db.txt", "r");
+			$user = fgets($handle, 4096);
+			$pass = fgets($handle, 4096);
+			fclose($handle);
+		}
+		else {
+			exit("db.txt must have been setted.\n");
+		}
+		
+		$link_db = new PDO('mysql:host=localhost;dbname=apks;charset=utf8', trim($user), trim($pass));
+		$stmt = $link_db -> prepare("select count(*) from `apk_info` where apk_source = :apk_source");
+		$result = $stmt -> execute(array(
+			":apk_source" => $file_paths[$len-1]
+		));
+		
+		$res = array();
+		$index = 0;
+		
+		while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+			$row["apk_id"] = $res[$index]["apk_id"];
+			$index++;
+		}
+		
+		$check = false;
+		
+		for($index=2;$index<$len;$index++) {
+			for($j=0;$j<count($res);$j++) {
+				if(stristr($file_paths[$index], $res[$j]["apk_id"]) == false) {
+					$check = true;
+				}
+				else {
+					$check = false;
+					break;
+				}
+			}
+			
+			if($check == false) {
+				echo $file_paths[$index] . "\n";
 			}
 		}
 	}
@@ -109,12 +163,12 @@
 			
 				$stmt -> execute($data);
 				
-				if($stmt->rowCount()) {
+				if($stmt -> rowCount()) {
 					echo "store success\n";
 				}
 				else {
 					if(!check_duplicate($link_db, $data))
-						echo $apk_file_path . " is on inserted...\n";
+						echo $apk_file_path . " is no inserted...\n";
 				}
 			}
 			catch(PDOException $e) {
