@@ -113,7 +113,7 @@
 		$process = new Process($command);
 		
 		$process -> run(function ($type, $buffer) {
-			echo $buffer . "\n";
+			echo $type . "\n";
 			if(Process::ERR === $type) {
 				$buffer = str_replace(["\r", "\n"], "", $buffer);
 				$buffer = trim($buffer);
