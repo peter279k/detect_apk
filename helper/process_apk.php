@@ -168,6 +168,7 @@
 			
 				$stmt -> execute($data);
 				
+				echo "row count: " . $stmt -> rowCount() . "\n";
 				if($stmt -> rowCount()) {
 					echo "store success\n";
 				}
