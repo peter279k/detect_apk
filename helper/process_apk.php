@@ -60,6 +60,7 @@
 			}
 		});
 		
+		var_dump($data);
 		store_data($data);
 	}
 	
@@ -74,8 +75,8 @@
 		//using MySQL to store apk information
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
-			echo $user = fgets($handle, 4096) . "\n";
-			echo $pass = fgets($handle, 4096) . "\n";
+			$user = fgets($handle, 4096);
+			$pass = fgets($handle, 4096);
 			fclose($handle);
 		}
 		else {
