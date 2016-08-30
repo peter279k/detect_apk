@@ -60,8 +60,6 @@
 			$index++;
 		}
 		
-		$link_db = null;
-		
 		$check = false;
 		
 		for($index=2;$index<$len;$index++) {
