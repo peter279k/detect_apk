@@ -2,6 +2,7 @@
 	use Symfony\Component\Process\Process;
 	
 	$data = array();
+	$apk_file_path = null;
 	
 	function process_apk($file_path, $aapt) {
 		if(!is_dir($file_path)) {
@@ -41,6 +42,9 @@
 		$data[":size"] = filesize($file_path . "\\" . $file_name);
 		$data[":hash"] = md5(file_get_contents($file_path . "\\" . $file_name));
 		
+		global $apk_file_path;
+		$apk_file_path = $file_path . "\\" . $file_name;
+		
 		//temporarily using default value
 		
 		$data[":downloads"] = 0;
@@ -71,7 +75,8 @@
 						$data[":version"] = $buffers[3];
 						
 						//var_dump($data);
-						store_data($data, $file_path . "\\" . $file_name);
+						global $apk_file_path;
+						store_data($data, $apk_file_path);
 					}
 				}
 			}
