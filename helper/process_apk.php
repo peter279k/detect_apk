@@ -106,6 +106,7 @@
 				
 				if($e -> getCode() == 1062) {
 					// Take some action if there is a key constraint violation, i.e. duplicate name
+					echo "duplicate record.\n";
 				}
 				else {
 					throw $e;
