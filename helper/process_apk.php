@@ -56,7 +56,7 @@
 		$index = 0;
 		
 		while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-			$row["apk_id"] = $res[$index]["apk_id"];
+			$res[$index]["apk_id"] = $row["apk_id"];
 			$index++;
 		}
 		
