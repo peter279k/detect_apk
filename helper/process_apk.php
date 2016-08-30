@@ -16,7 +16,7 @@
 		
 		$len = count($apk_dirs);
 		
-		match_apk($apk_dirs, $file_paths);
+		match_apk($apk_dirs, $file_path);
 		
 		/*
 		for(;$index<$len;$index++) {
