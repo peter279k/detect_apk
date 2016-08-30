@@ -65,7 +65,7 @@
 		for($index=2;$index<$len;$index++) {
 			for($j=0;$j<count($res);$j++) {
 				if(stristr($file_paths[$index], $res[$j]["apk_id"]) == false) {
-					echo $file_paths[$index] . "\n";
+					//echo $file_paths[$index] . "\n";
 					echo $res[$j]["apk_id"] . "\n";
 					$check = true;
 				}
