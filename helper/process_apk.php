@@ -149,6 +149,8 @@
 	
 	function store_data($data, $apk_file_path) {
 		//using MySQL to store apk information
+		var_dump($data);
+		
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
 			$user = fgets($handle, 4096);
@@ -177,8 +179,6 @@
 					echo "\nPDO::errorInfo():\n";
 					var_dump($link_db -> errorInfo());
 				}
-				
-				var_dump($data);
 			}
 			catch(PDOException $e) {
 				echo "store failed\n";
