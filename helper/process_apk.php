@@ -113,7 +113,6 @@
 		$process = new Process($command);
 		$process -> run(function ($type, $buffer) {
 			if(Process::ERR === $type) {
-				echo "error happen...";
 				$buffer = str_replace(["\r", "\n"], "", $buffer);
 				$buffer = trim($buffer);
 				if(strlen($buffer) != 0)
@@ -136,6 +135,12 @@
 						global $apk_file_path;
 						store_data($data, $apk_file_path);
 					}
+					else {
+						echo "no-package\n";
+					}
+				}
+				else {
+					echo "buffer-count-error\n";
 				}
 			}
 		});
