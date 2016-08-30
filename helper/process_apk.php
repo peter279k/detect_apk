@@ -74,8 +74,8 @@
 		//using MySQL to store apk information
 		if(file_exists("./db.txt")) {
 			$handle = fopen("./db.txt", "r");
-			$user = fgets($handle, 4096);
-			$pass = fgets($handle, 4096);
+			echo $user = fgets($handle, 4096) . "\n";
+			echo $pass = fgets($handle, 4096) . "\n";
 			fclose($handle);
 		}
 		else {
