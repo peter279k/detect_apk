@@ -49,6 +49,8 @@
 		
 		exec($command);
 		
+		sleep(20);
+		
 		$handle = fopen("./res.txt", "r");
 		
 		$buffer = fgets($handle);
