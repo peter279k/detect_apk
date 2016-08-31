@@ -1,5 +1,4 @@
 <?php
-	use Symfony\Component\Process\Process;
 	
 	$data = array();
 	$apk_file_path = null;
@@ -47,9 +46,14 @@
 		$data[":category"] = "無";
 		$data[":develop_team"] = "無";
 		
-		exec($command);
+		$output = array();
+		$exit = 1;
 		
-		sleep(20);
+		exec($command, $output, $exit);
+		
+		while($exit == 1) {
+			echo "wait for the command executing finished...\n";
+		}
 		
 		$handle = fopen("./res.txt", "r");
 		
