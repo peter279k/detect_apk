@@ -51,8 +51,9 @@
 		
 		exec($command, $output, $exit);
 		
-		while($exit == 1) {
-			echo "wait for the command executing finished...\n";
+		if($exit == 1) {
+			var_dump($output);
+			exit();
 		}
 		
 		$handle = fopen("./res.txt", "r");
