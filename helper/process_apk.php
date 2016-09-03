@@ -52,7 +52,9 @@
 		exec($command, $output, $exit);
 		
 		if($exit != 0) {
-			file_put_contents("error_aapt.log", $output . "\r\n\r\n", FILE_APPEND);
+			foreach($output as $value) {
+				file_put_contents("error_aapt.log", $value . "\r\n", FILE_APPEND);
+			}
 		}
 		
 		$handle = fopen("./res.txt", "r");
