@@ -51,7 +51,7 @@
 		
 		exec($command, $output, $exit);
 		
-		if($exit == 1) {
+		if($exit != 0) {
 			var_dump($output);
 			exit();
 		}
